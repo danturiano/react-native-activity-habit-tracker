@@ -14,8 +14,14 @@ type HabitCardProps = {
 
 export default function HabitCard({ habit }: HabitCardProps) {
   return (
-    <View className="w-full rounded-md">
-      <Text>{habit.title}</Text>
+    <View className="w-full rounded-lg bg-[#DDEDEC] p-6">
+      <Text className="text-4xl">{habit.title}</Text>
+      {habit.duration && <Text className="text-right text-2xl">{habit.duration} min</Text>}
+      {habit.times_per_day && (
+        <Text className="text-right text-2xl">
+          {habit.times_completed + '/' + habit.times_per_day} Completed
+        </Text>
+      )}
     </View>
   );
 }
