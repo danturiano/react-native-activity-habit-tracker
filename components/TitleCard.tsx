@@ -8,8 +8,8 @@ type TitleCardProps = {
 };
 
 const variantStyles = {
-  sm: { subtitle: 'text-sm', title: 'text-xl' },
-  md: { subtitle: 'text-lg', title: 'text-2xl' },
+  sm: { subtitle: 'text-lg', title: 'text-2xl' },
+  md: { subtitle: 'text-xl', title: 'text-4xl font-regular' },
   lg: { subtitle: 'text-3xl', title: 'text-[74px] leading-none' },
 };
 

@@ -9,7 +9,7 @@ export default function UserProfile() {
         source={require('../assets/uifaces-abstract-image.jpg')}
         className="size-14 rounded-full"
       />
-      <TitleCard title="Daniel Joshua" subtitle="morning," variant="md" />
+      <TitleCard title="Daniel Joshua" subtitle="morning," variant="sm" />
     </View>
   );
 }
