@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native';
 
-type Habit = {
+export type Habit = {
   title: string;
   duration: number | undefined;
   is_done: boolean;
@@ -14,14 +14,17 @@ type HabitCardProps = {
 
 export default function HabitCard({ habit }: HabitCardProps) {
   return (
-    <View className="w-full rounded-lg bg-[#DDEDEC] p-6">
+    <View className="w-full rounded-2xl bg-[#DDEDEC] p-6">
       <Text className="text-4xl">{habit.title}</Text>
-      {habit.duration && <Text className="text-right text-2xl">{habit.duration} min</Text>}
-      {habit.times_per_day && (
-        <Text className="text-right text-2xl">
-          {habit.times_completed + '/' + habit.times_per_day} Completed
-        </Text>
-      )}
+      <View className="flex-row items-center justify-end gap-2">
+        {habit.duration && <Text className="text-right text-xl">{habit.duration} min</Text>}
+        {habit.duration && habit.times_per_day && <Text className="text-xl">&</Text>}
+        {habit.times_per_day && (
+          <Text className="text-right text-xl">
+            {habit.times_completed + '/' + habit.times_per_day} Completed
+          </Text>
+        )}
+      </View>
     </View>
   );
 }

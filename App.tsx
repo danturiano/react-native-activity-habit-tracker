@@ -1,7 +1,8 @@
 import AppContainer from 'components/AppContainer';
-import HabitCard from 'components/HabitCard';
+import HabitCard, { Habit } from 'components/HabitCard';
 import Header from 'components/Header';
 import Seperator from 'components/Seperator';
+import TitleCard from 'components/TitleCard';
 import { habitsData } from 'data/sample-data';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
@@ -17,10 +18,13 @@ export default function App() {
       <AppContainer>
         <Header />
         <Seperator />
-        <View className="flex-col gap-2">
-          {habits.map((habit) => (
-            <HabitCard habit={habit} />
-          ))}
+        <View className="flex-col gap-6">
+          <TitleCard title="your habits" subtitle="track" variant="lg" />
+          <View className="flex-col gap-2">
+            {habits.map((habit, index) => (
+              <HabitCard habit={habit} key={index} />
+            ))}
+          </View>
         </View>
       </AppContainer>
       <StatusBar style="auto" />
