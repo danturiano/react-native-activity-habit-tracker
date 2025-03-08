@@ -1,9 +1,9 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import AddModal from 'components/AddModal';
 import CompletedHabits from 'components/CompletedHabits';
-import { Habit } from 'components/HabitCard';
+import HabitCard, { Habit } from 'components/HabitCard';
 import HabitsContainer from 'components/HabitsContainer';
 import Header from 'components/Header';
+import NewHabitModal from 'components/NewHabitModal';
 import { habitsData } from 'data/sample-data';
 import { useState } from 'react';
 import { SafeAreaView, ScrollView, TouchableHighlight, View } from 'react-native';
@@ -17,14 +17,24 @@ export default function App() {
     setIsModalVisible((prev) => !prev);
   };
 
-  const handleAddHabit = (newHabit: any) => {
+  const handleAddHabit = (newHabit: Habit) => {
     setHabits((prev) => [...prev, newHabit]);
+  };
+
+  const handleRemoveHabit = (title: string) => {
+    setHabits((habits) => {
+      return habits.filter((habit) => habit.title !== title);
+    });
   };
 
   return (
     <SafeAreaView className="flex-1 bg-gray-100">
       {isModalVisible && (
-        <AddModal visible={isModalVisible} onClose={toggleModal} handleAddHabit={handleAddHabit} />
+        <NewHabitModal
+          visible={isModalVisible}
+          onClose={toggleModal}
+          handleAddHabit={handleAddHabit}
+        />
       )}
       <View className="flex-1">
         <Header>
@@ -35,7 +45,15 @@ export default function App() {
           </TouchableHighlight>
         </Header>
         <ScrollView className="flex-1">
-          <HabitsContainer habits={habits} />
+          <HabitsContainer habits={habits}>
+            <View className="flex-col gap-2">
+              {habits
+                .filter((habit) => !habit.is_done)
+                .map((habit, index) => (
+                  <HabitCard habit={habit} key={index} handleRemoveHabit={handleRemoveHabit} />
+                ))}
+            </View>
+          </HabitsContainer>
           <CompletedHabits habits={habits} />
         </ScrollView>
       </View>

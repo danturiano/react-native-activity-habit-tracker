@@ -6,21 +6,16 @@ import TitleCard from './TitleCard';
 
 type HabitsContainerProps = {
   habits: Habit[];
+  children: React.ReactNode;
 };
 
-export default function HabitsContainer({ habits }: HabitsContainerProps) {
+export default function HabitsContainer({ habits, children }: HabitsContainerProps) {
   return (
     <View className="flex flex-col gap-6 px-8">
       <Seperator />
       <View className="flex-col gap-6">
         <TitleCard title="your habits" subtitle="track" variant="lg" />
-        <View className="flex-col gap-2">
-          {habits
-            .filter((habit) => !habit.is_done)
-            .map((habit, index) => (
-              <HabitCard habit={habit} key={index} />
-            ))}
-        </View>
+        {children}
       </View>
     </View>
   );

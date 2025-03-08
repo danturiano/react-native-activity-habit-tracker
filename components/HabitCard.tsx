@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 
 export type Habit = {
   title: string;
@@ -10,21 +10,24 @@ export type Habit = {
 
 type HabitCardProps = {
   habit: Habit;
+  handleRemoveHabit: (id: string) => void;
 };
 
-export default function HabitCard({ habit }: HabitCardProps) {
+export default function HabitCard({ habit, handleRemoveHabit }: HabitCardProps) {
   return (
     <View className="w-full rounded-2xl bg-[#DDEDEC] p-6">
-      <Text className="text-4xl">{habit.title}</Text>
-      <View className="flex-row items-center justify-end gap-2">
-        {habit.duration && <Text className="text-right text-xl">{habit.duration} min</Text>}
-        {habit.duration && habit.times_per_day && <Text className="text-xl">&</Text>}
-        {habit.times_per_day && (
-          <Text className="text-right text-xl">
-            {habit.times_completed + '/' + habit.times_per_day} Completed
-          </Text>
-        )}
-      </View>
+      <Pressable onPress={() => handleRemoveHabit(habit.title)}>
+        <Text className="text-4xl">{habit.title}</Text>
+        <View className="flex-row items-center justify-end gap-2">
+          {habit.duration && <Text className="text-right text-xl">{habit.duration} min</Text>}
+          {habit.duration && habit.times_per_day && <Text className="text-xl">&</Text>}
+          {!!habit.times_per_day && (
+            <Text className="text-right text-xl">
+              {habit.times_completed + '/' + habit.times_per_day} Completed
+            </Text>
+          )}
+        </View>
+      </Pressable>
     </View>
   );
 }

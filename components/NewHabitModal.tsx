@@ -15,9 +15,10 @@ const initialHabitForm = {
   duration: '',
   is_done: false,
   times_per_day: '',
+  times_completed: '1',
 };
 
-export default function AddModal({ visible = false, onClose, handleAddHabit }: AddModalProps) {
+export default function NewHabitModal({ visible = false, onClose, handleAddHabit }: AddModalProps) {
   const [form, setForm] = useState(initialHabitForm);
 
   const handleChange = (field: string, value: string | number) => {
