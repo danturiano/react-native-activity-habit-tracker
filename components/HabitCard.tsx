@@ -2,10 +2,10 @@ import { Text, View } from 'react-native';
 
 export type Habit = {
   title: string;
-  duration: number | undefined;
+  duration: string | undefined;
   is_done: boolean;
-  times_per_day?: number | undefined;
-  times_completed?: number;
+  times_per_day?: string | undefined;
+  times_completed?: string | undefined;
 };
 
 type HabitCardProps = {

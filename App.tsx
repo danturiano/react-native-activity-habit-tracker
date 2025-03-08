@@ -1,6 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AddModal from 'components/AddModal';
 import CompletedHabits from 'components/CompletedHabits';
+import { Habit } from 'components/HabitCard';
 import HabitsContainer from 'components/HabitsContainer';
 import Header from 'components/Header';
 import { habitsData } from 'data/sample-data';
@@ -9,16 +10,22 @@ import { SafeAreaView, ScrollView, TouchableHighlight, View } from 'react-native
 import './global.css';
 
 export default function App() {
-  const [habits, setHabits] = useState(habitsData);
+  const [habits, setHabits] = useState<Habit[]>(habitsData);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const toggleModal = () => {
     setIsModalVisible((prev) => !prev);
   };
 
+  const handleAddHabit = (newHabit: any) => {
+    setHabits((prev) => [...prev, newHabit]);
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-gray-100">
-      {isModalVisible && <AddModal visible={isModalVisible} onClose={toggleModal} />}
+      {isModalVisible && (
+        <AddModal visible={isModalVisible} onClose={toggleModal} handleAddHabit={handleAddHabit} />
+      )}
       <View className="flex-1">
         <Header>
           <TouchableHighlight
