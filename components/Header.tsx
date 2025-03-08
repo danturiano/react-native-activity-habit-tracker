@@ -1,13 +1,16 @@
 import { View } from 'react-native';
 
-import AddButton from './AddButton';
 import UserProfile from './UserProfile';
 
-export default function Header() {
+type HeaderProps = {
+  children: React.ReactNode;
+};
+
+export default function Header({ children }: HeaderProps) {
   return (
-    <View className="flex-row items-center justify-between">
+    <View className="mb-6 flex-row items-center justify-between px-8 pt-6">
       <UserProfile />
-      <AddButton />
+      {children}
     </View>
   );
 }
