@@ -27,6 +27,12 @@ export default function App() {
     });
   };
 
+  const handleUpdateHabit = (title: string) => {
+    setHabits((habits) =>
+      habits.map((habit) => (habit.title === title ? { ...habit, is_done: true } : habit))
+    );
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-gray-100">
       {isModalVisible && (
@@ -50,7 +56,12 @@ export default function App() {
               {habits
                 .filter((habit) => !habit.is_done)
                 .map((habit, index) => (
-                  <HabitCard habit={habit} key={index} handleRemoveHabit={handleRemoveHabit} />
+                  <HabitCard
+                    habit={habit}
+                    key={index}
+                    handleRemoveHabit={handleRemoveHabit}
+                    handleUpdateHabit={handleUpdateHabit}
+                  />
                 ))}
             </View>
           </HabitsContainer>
