@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Button, Modal, Pressable, Text, TouchableHighlight, View } from 'react-native';
+import { useHabit } from './HabitContext';
 
 export type Habit = {
   title: string;
@@ -11,12 +12,11 @@ export type Habit = {
 
 type HabitCardProps = {
   habit: Habit;
-  handleRemoveHabit: (title: string) => void;
-  handleUpdateHabit: (title: string) => void;
 };
 
-export default function HabitCard({ habit, handleRemoveHabit, handleUpdateHabit }: HabitCardProps) {
+export default function HabitCard({ habit }: HabitCardProps) {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const { handleUpdateHabit, handleRemoveHabit } = useHabit();
 
   const toggleModal = () => setIsModalVisible((prev) => !prev);
   const closeModal = () => setIsModalVisible(false);

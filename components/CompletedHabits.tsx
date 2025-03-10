@@ -2,14 +2,11 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { View } from 'react-native';
 
 import CompletedCard from './CompletedCard';
-import { Habit } from './HabitCard';
+import { useHabit } from './HabitContext';
 import TitleCard from './TitleCard';
 
-type CompletedHabitsProps = {
-  habits: Habit[];
-};
-
-export default function CompletedHabits({ habits }: CompletedHabitsProps) {
+export default function CompletedHabits() {
+  const { habits } = useHabit();
   return (
     <View className="mt-6 min-h-full flex-col gap-6 rounded-3xl bg-white p-8">
       <View className="flex-row items-center justify-between">

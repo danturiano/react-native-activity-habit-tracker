@@ -1,13 +1,11 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState } from 'react';
 import { Modal, Text, TextInput, TouchableHighlight, View } from 'react-native';
-
-import { Habit } from './HabitCard';
+import { useHabit } from './HabitContext';
 
 type AddModalProps = {
   visible: boolean;
   onClose: () => void;
-  handleAddHabit: (data: Habit) => void;
 };
 
 const initialHabitForm = {
@@ -18,8 +16,9 @@ const initialHabitForm = {
   times_completed: '1',
 };
 
-export default function NewHabitModal({ visible = false, onClose, handleAddHabit }: AddModalProps) {
+export default function NewHabitModal({ visible = false, onClose }: AddModalProps) {
   const [form, setForm] = useState(initialHabitForm);
+  const { handleAddHabit } = useHabit();
 
   const handleChange = (field: string, value: string | number) => {
     setForm((prev) => ({
